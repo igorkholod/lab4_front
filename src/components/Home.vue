@@ -1,7 +1,13 @@
 <template>
         <div class="welcome-container">
             <div>
-                <p>Welcome.</p>
+                <p v-if="user && user.username">Welcome, {{user.username}}
+                    (<router-link class="link" :to="{name: 'Logout'}">logout</router-link>).</p>
+                <p v-else>Welcome. You can
+                    <router-link class="link" :to="{name: 'Login'}">login</router-link>,
+                    <router-link class="link" :to="{name: 'Register'}">register</router-link>
+                    or instantly start!
+                </p>
                 <span>Please, provide a drug name in the field below.</span>
                 <form id="search_form" action="#"  method="post">
                     <input id="search_field" type="text" name="search_term" v-model="search_term"
@@ -15,6 +21,8 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
+
     export default {
         name: "Home",
         mounted() {
@@ -38,6 +46,14 @@
                     }, 1000);
                 }
             }
-        }
+        },
+        computed: mapState(['user'])
     }
 </script>
+
+<style>
+    .welcome-container .link {
+        text-decoration: none;
+        color: mediumspringgreen;
+    }
+</style>

@@ -1,6 +1,10 @@
 <template>
     <nav>
         <router-link class="left" :to="{name: 'Home'}">MAIN</router-link>
+        <router-link v-if="!(user && user.username)" class="right" :to="{name: 'Login'}">LOGIN</router-link>
+        <router-link v-if="!(user && user.username)" class="right" :to="{name: 'Register'}">REGISTER</router-link>
+        <router-link v-if="user && user.username" :to="{}" class="right">{{user.username}}</router-link>
+        <router-link v-if="user && user.username" class="right" :to="{name: 'Logout'}">LOGOUT</router-link>
         <router-link class="right" :to="{name: 'About'}">ABOUT</router-link>
         <router-link id="search_mobile" class="left" :to="{name: 'DrugSearch'}">SEARCH</router-link>
         <div class="search-container">
@@ -15,11 +19,12 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     export default {
         name: "NavigationBar",
         data () {
             return {
-                search_term: null
+                search_term: null,
             }
         },
         methods: {
@@ -39,6 +44,7 @@
             script.setAttribute('src', 'https://kit.fontawesome.com/0aa1058b8e.js');
             document.head.appendChild(script);
         },
+        computed: mapState(['jwt', 'user'])
     }
 </script>
 

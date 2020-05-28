@@ -6,6 +6,9 @@ import Home from "@/components/Home";
 import DrugInfo from "@/components/DrugInfo";
 import PharmacySearch from "@/components/PharmacySearch";
 import About from "@/components/About";
+import Login from "@/components/Login";
+import Logout from "@/components/Logout";
+import Register from "@/components/Register";
 
 Vue.use(VueRouter)
 
@@ -37,6 +40,21 @@ export default new VueRouter({
             path: '/about/',
             name: 'About',
             component: About
-        }
+        },
+        {
+            path: '/login/',
+            name: 'Login',
+            component: Login
+        },
+        {
+            path: '/logout/',
+            name: 'Logout',
+            component: Logout
+        },
+        {
+            path: '/register/',
+            name: 'Register',
+            component: Register
+        },
     ]
 })
